@@ -15,7 +15,7 @@ env:
 
 jobs:
   ci:
-    runs-on: ubuntu-20.04
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
       - name: Switch to CI bazelrc
@@ -62,9 +62,9 @@ jobs:
       - name: Build images
         if: ${{ github.event_name == 'push' }}
         run: |
-          docker build --platform linux/arm64 -t $BASE_IMAGE_NAME --file docker/base/Dockerfile --build-arg "livegrep_version=$build_output_file_name"  .
-          docker build --platform linux/arm64 -t $INDEXER_IMAGE_NAME . --file docker/indexer/Dockerfile
-          docker build --platform linux/arm64 -t $NGINX_IMAGE_NAME . --file docker/nginx/Dockerfile
+          docker build -t $BASE_IMAGE_NAME --file docker/base/Dockerfile --build-arg "livegrep_version=$build_output_file_name"  .
+          docker build -t $INDEXER_IMAGE_NAME . --file docker/indexer/Dockerfile
+          docker build -t $NGINX_IMAGE_NAME . --file docker/nginx/Dockerfile
       - name: Push images
         if: ${{ github.event_name == 'push' }}
         run: |
