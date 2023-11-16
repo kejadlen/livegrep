@@ -32,7 +32,7 @@ jobs:
             exit
           fi
           printf 'Using writable cache\n'
-          sed -i 's/common --remote_upload_local_results=false/common --remote_upload_local_results=true/' .bazelrc
+          sed -e 's/common --remote_upload_local_results=false/common --remote_upload_local_results=true/' .bazelrc
       - name: bazel build
         id: build
         run: |
