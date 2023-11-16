@@ -36,6 +36,7 @@ jobs:
       - name: bazel build
         id: build
         run: |
+          brew install bazelisk
           bazel build //...
           echo "build_output_file_name=$(./package.sh)" >> $GITHUB_ENV
       - name: bazel test
